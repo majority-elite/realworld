@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Home } from './components/pages/Home';
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <BrowserRouter>
         <Header isAuthenticated={false} />
         <Routes>
+          <Route path="/" Component={Home}></Route>
           <Route path="/login"></Route>
           <Route path="/register"></Route>
           <Route path="/settings"></Route>

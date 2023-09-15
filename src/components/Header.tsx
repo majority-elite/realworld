@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface HeaderProps {
@@ -8,8 +7,6 @@ interface HeaderProps {
 export const Header = ({ isAuthenticated }: HeaderProps) => {
   const location = useLocation();
   const locationPathName = location.pathname;
-
-  useEffect(() => {}, [location]);
 
   const navItemsAuthenticated = (
     <>

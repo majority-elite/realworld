@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Header } from './components/Header';
-import { Home } from './components/pages/Home';
-import { Footer } from './components/Footer';
-import { Login } from './components/pages/Login';
-import { Register } from './components/pages/Register';
+import { Header } from '@/components/Header';
+import { Home } from '@/components/pages/Home';
+import { Footer } from '@/components/Footer';
+import { Login } from '@/components/pages/Login';
+import { Register } from '@/components/pages/Register';
 
 function App() {
   return (

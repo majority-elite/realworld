@@ -2,7 +2,7 @@
   box-sizing: inherit;
 }
 
-.home-page {
+div[class$='page'] {
   width: 100%;
 }
 

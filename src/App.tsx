@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Home } from './components/pages/Home';
 import { Footer } from './components/Footer';
+import { Login } from './components/pages/Login';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Header isAuthenticated={false} />
         <Routes>
           <Route path="/" Component={Home}></Route>
-          <Route path="/login"></Route>
+          <Route path="/login" Component={Login}></Route>
           <Route path="/register"></Route>
           <Route path="/settings"></Route>
           <Route path="/article/:slug"></Route>

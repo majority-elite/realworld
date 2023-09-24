@@ -38,8 +38,6 @@ const NavItem = ({
 };
 
 export const Header = ({ isAuthenticated }: HeaderProps) => {
-  const locationPathName = location.pathname;
-
   const navItemsAuthenticated = (
     <>
       <NavItem

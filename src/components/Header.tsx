@@ -1,71 +1,80 @@
 import { Link, useLocation } from 'react-router-dom';
 
+interface NavItemProps {
+  linkTo: string;
+  caption: string;
+  activeAt: RegExp;
+  imageUrl?: string;
+  iconType?: string;
+}
+
 interface HeaderProps {
   isAuthenticated: boolean;
 }
 
-export const Header = ({ isAuthenticated }: HeaderProps) => {
+const NavItem = ({
+  linkTo,
+  caption,
+  activeAt,
+  imageUrl,
+  iconType,
+}: NavItemProps) => {
   const location = useLocation();
+
+  return (
+    <li className="nav-item">
+      <Link
+        className={`nav-link ${
+          activeAt.test(location.pathname) ? 'active' : ''
+        }`}
+        to={linkTo}
+      >
+        {imageUrl && <img src={imageUrl} className="user-pic" />}
+        {iconType && <i className="ion-compose"></i>}
+        {` ${caption} `}
+      </Link>
+    </li>
+  );
+};
+
+export const Header = ({ isAuthenticated }: HeaderProps) => {
   const locationPathName = location.pathname;
 
   const navItemsAuthenticated = (
     <>
-      <li className="nav-item">
-        <Link
-          className={`nav-link ${
-            locationPathName === '/editor' ? 'active' : ''
-          }`}
-          to="/editor"
-        >
-          <i className="ion-compose"></i> New Article{' '}
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className={`nav-link ${
-            locationPathName === '/settings' ? 'active' : ''
-          }`}
-          to="/settings"
-        >
-          <i className="ion-gear-a"></i> Settings{' '}
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className={`nav-link ${
-            /^\/profile.+$/.test(locationPathName) ? 'active' : ''
-          }`}
-          to="/profile/eric-simons"
-        >
-          <img src="" className="user-pic" />
-          Eric Simons
-        </Link>
-      </li>
+      <NavItem
+        linkTo="/editor"
+        caption="New Article"
+        activeAt={new RegExp('\\/editor')}
+        iconType="ion-compose"
+      />
+      <NavItem
+        linkTo="/settings"
+        caption="Settings"
+        activeAt={new RegExp('\\/settings.+')}
+        iconType="ion-gear-a"
+      />
+      <NavItem
+        linkTo="/profile/eric-simons"
+        caption="Eric Simons"
+        activeAt={new RegExp('\\/profile.+')}
+        imageUrl=""
+      />
     </>
   );
 
   const navItemsUnauthenticated = (
     <>
-      <li className="nav-item">
-        <Link
-          className={`nav-link ${
-            locationPathName === '/login' ? 'active' : ''
-          }`}
-          to="/login"
-        >
-          Sign in
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          className={`nav-link ${
-            locationPathName === '/register' ? 'active' : ''
-          }`}
-          to="/register"
-        >
-          Sign up
-        </Link>
-      </li>
+      <NavItem
+        linkTo="/login"
+        caption="Sign in"
+        activeAt={new RegExp('\\/login')}
+      />
+      <NavItem
+        linkTo="/register"
+        caption="Sign up"
+        activeAt={new RegExp('\\/register')}
+      />
     </>
   );
 
@@ -76,14 +85,7 @@ export const Header = ({ isAuthenticated }: HeaderProps) => {
           conduit
         </Link>
         <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            <Link
-              className={`nav-link ${locationPathName === '/' ? 'active' : ''}`}
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
+          <NavItem linkTo="/" activeAt={new RegExp('^\\/$')} caption="Home" />
           {isAuthenticated ? navItemsAuthenticated : navItemsUnauthenticated}
         </ul>
       </div>
